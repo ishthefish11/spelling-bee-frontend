@@ -1,0 +1,203 @@
+/* General Layout */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Animated Background */
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(135deg, #6a8dd3, #5e9cda, #4d83d4, #7db1ec);
+  background-size: 300% 300%;
+  animation: gradient-animation 15s ease infinite;
+  filter: brightness(85%);
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* GitHub icon wrapper */
+.github {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10;
+  }
+  
+  .github-icon {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+    display: block;
+  }
+  
+  .github-text {
+    display: none;
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, left 0.3s ease;
+  }
+  
+
+  .github:hover .github-icon {
+    transform: translateY(-5px);
+  }
+  
+  .github:hover .github-text {
+    display: inline-block;
+    opacity: 1;
+    left: 60px;
+  }
+  
+/* Navigation Bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #1f2d3f;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.nav-icons {
+  display: flex;
+}
+
+.nav-icons .icon {
+  margin: 0 8px;
+  cursor: pointer;
+  color: white;
+  transition: color 0.2s;
+}
+
+.nav-icons .icon:hover {
+  color: #4caf50;
+}
+
+/* Play Button */
+.play-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.play-btn:hover {
+  background-color: #45a049;
+}
+
+/* Main Content */
+.main-content {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.tutorial-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tutorial-btn:hover {
+  background-color: #45a049;
+}
+
+
+/* Popup Overlay */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.popup-content h2 {
+  margin-top: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-btn:hover {
+  color: black;
+}
