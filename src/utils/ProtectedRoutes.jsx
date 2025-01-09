@@ -21,9 +21,9 @@ const ProtectedRoutes = () => {
       });
   }, []);
 
-  // Show nothing or loading indicator while fetching authentication status
+  // Prevent rendering until authentication status is determined
   if (isAuthenticated === null) {
-    return <div>Loading...</div>; // Or you can return `null` for a cleaner UI
+    return null; // No flicker, no loading UI
   }
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
