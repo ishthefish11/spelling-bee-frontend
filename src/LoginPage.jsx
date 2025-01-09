@@ -23,6 +23,7 @@ function LoginPage() {
       if (response.ok) {
         // Login successful
         console.log("Login successful!");
+        window.location.href = "/";
       } else {
         // Handle login failure
         const errorMessage = await response.text();

@@ -1,10 +1,13 @@
-// HomePage.jsx - Main Content File
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { User, Trophy, Settings, PlayCircle } from 'lucide-react';
 import './HomePage.css';
+import getPlayerInfo from "./utils/Helper";
 
 function HomePage() {
   const [popup, setPopup] = useState(null);
+  const [loading, setLoading] = useState(false); // Add loading state
+  const [profileData, setProfileData] = useState(null); // Add profileData state
+  const [error, setError] = useState(null); // Add error state
 
   const handlePopup = (type) => {
     setPopup(type);
@@ -13,6 +16,22 @@ function HomePage() {
   const closePopup = () => {
     setPopup(null);
   };
+
+  useEffect(() => {
+    if (popup === "profile") {
+      setLoading(true);
+      setError(null);
+      getPlayerInfo()
+        .then((data) => {
+          setProfileData(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setError("Failed to fetch profile information.");
+          setLoading(false);
+        });
+    }
+  }, [popup]);
 
   return (
     <div className="animated-background">
@@ -76,7 +95,16 @@ function HomePage() {
               {popup === "profile" && (
                 <div>
                   <h2>Profile</h2>
-                  <p>Profile information will go here. {/* Add API requests */}</p>
+                  {loading && <p>Loading...</p>}
+                  {error && <p>{error}</p>}
+                  {profileData && (
+                    <div>
+                      <p><strong>Username:</strong> {profileData.playerName}</p>
+                      <p><strong>Email:</strong> {profileData.email}</p>
+                      <p><strong>Last Login:</strong> {new Date(profileData.lastLogin).toLocaleString()}</p>
+                      {/* Add more fields as needed */}
+                    </div>
+                  )}
                 </div>
               )}
               {popup === "leaderboard" && (
