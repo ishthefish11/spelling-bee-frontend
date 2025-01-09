@@ -9,24 +9,20 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(""); // Clear any previous errors
-
+  
     try {
-      const response = await fetch(
-        "http://localhost:8080/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ playerName, password }),
-          credentials: "include", // Ensures cookies like session ID are handled
-        }
-      );
-
+      const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ playerName, password }),
+        credentials: "include",
+      });
+  
       if (response.ok) {
         // Login successful
         console.log("Login successful!");
-        window.location.href = "/"; // Redirect after successful login
       } else {
         // Handle login failure
         const errorMessage = await response.text();
@@ -37,6 +33,7 @@ function LoginPage() {
       setError("An unexpected error occurred");
     }
   };
+  
 
   return (
     <div className="login-container">
