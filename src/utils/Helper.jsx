@@ -10,6 +10,7 @@ const getPlayerInfo = async () => {
       // If playerId exists, fetch player data
       const response = await fetch(`http://localhost:8080/players/${playerId}`, {
         method: "GET",
+        
         credentials: "include", // Include cookies
       });
 
