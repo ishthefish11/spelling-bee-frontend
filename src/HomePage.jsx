@@ -25,6 +25,7 @@ function HomePage() {
         .then((data) => {
           setProfileData(data);
           setLoading(false);
+          console.log(JSON.stringify(data, null, 2));  // Pretty print the JSON data
         })
         .catch((err) => {
           setError("Failed to fetch profile information.");
@@ -98,15 +99,55 @@ function HomePage() {
                   {loading && <p>Loading...</p>}
                   {error && <p>{error}</p>}
                   {profileData && (
-                    <div>
-                      <p><strong>Username:</strong> {profileData.playerName}</p>
-                      <p><strong>Email:</strong> {profileData.email}</p>
-                      <p><strong>Last Login:</strong> {new Date(profileData.lastLogin).toLocaleString()}</p>
-                      {/* Add more fields as needed */}
+                    <div className="profile-details">
+                      {/* Profile Header */}
+                      <div className="profile-header">
+                        <div className="profile-image">
+                          <img src="/path/to/avatar.png" alt="Profile Avatar" className="avatar" />
+                        </div>
+                        <div className="profile-info">
+                          <h3 className="profile-name">{profileData.playerName}</h3>
+                          <p className="profile-id">Player ID: {profileData.playerId}</p>
+                        </div>
+                      </div>
+
+                      {/* Profile Statistics */}
+                      <div className="profile-statistics">
+                        <div className="stat-card">
+                          <strong>High Score:</strong>
+                          <p>{profileData.highScore}</p>
+                        </div>
+                        <div className="stat-card">
+                          <strong>Total Games Played:</strong>
+                          <p>{profileData.totalGamesPlayed}</p>
+                        </div>
+                        <div className="stat-card">
+                          <strong>Account Created:</strong>
+                          <p>{new Date(profileData.accountCreationTimestamp).toLocaleString()}</p>
+                        </div>
+                      </div>
+
+                      {/* Last Ten Scores */}
+                      <div className="last-scores">
+                        <h4>Last Ten Scores:</h4>
+                        <div className="score-box">
+                          <ul>
+                            {profileData.lastTenScores && profileData.lastTenScores.length > 0 ? (
+                              profileData.lastTenScores.map((score, index) => (
+                                <li key={index}>Game {index + 1}: {score}</li>
+                              ))
+                            ) : (
+                              <p>No scores available</p>
+                            )}
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
               )}
+
+
               {popup === "leaderboard" && (
                 <div>
                   <h2>Leaderboard</h2>

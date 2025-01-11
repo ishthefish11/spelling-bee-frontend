@@ -53,7 +53,6 @@ const getPlayerInfo = async () => {
 
       // Set playerId cookie
       document.cookie = `playerId=${player.playerId}; Path=/; Secure; HttpOnly=false; Max-Age=${60 * 60 * 24}`;
-
       return player;
     }
   } catch (error) {
