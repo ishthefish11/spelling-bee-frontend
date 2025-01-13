@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { User, Trophy, Settings, PlayCircle } from 'lucide-react';
 import './HomePage.css';
-import getPlayerInfo from "./utils/Helper";
+import { getPlayerInfo, getLeaderboardGames } from './utils/Helper';
 
 function HomePage() {
   const [popup, setPopup] = useState(null);
   const [loading, setLoading] = useState(false); // Add loading state
   const [profileData, setProfileData] = useState(null); // Add profileData state
+  const [leaderboardData, setLeaderboardData] = useState(null); // Add leaderboard data state
   const [error, setError] = useState(null); // Add error state
 
   const handlePopup = (type) => {
@@ -17,18 +18,36 @@ function HomePage() {
     setPopup(null);
   };
 
+  // Fetch profile data when the profile popup is opened
   useEffect(() => {
-    if (popup === "profile") {
+    if (popup === 'profile') {
       setLoading(true);
       setError(null);
       getPlayerInfo()
         .then((data) => {
           setProfileData(data);
           setLoading(false);
-          console.log(JSON.stringify(data, null, 2));  // Pretty print the JSON data
+          console.log(JSON.stringify(data, null, 2)); // Pretty print the JSON data
         })
         .catch((err) => {
-          setError("Failed to fetch profile information.");
+          setError('Failed to fetch profile information.');
+          setLoading(false);
+        });
+    }
+  }, [popup]);
+
+  // Fetch leaderboard data when the leaderboard popup is opened
+  useEffect(() => {
+    if (popup === 'leaderboard') {
+      setLoading(true);
+      setError(null);
+      getLeaderboardGames()
+        .then((data) => {
+          setLeaderboardData(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setError('Failed to fetch leaderboard information.');
           setLoading(false);
         });
     }
@@ -39,14 +58,14 @@ function HomePage() {
       <div className="container">
         {/* Navigation Bar */}
         <nav className="navbar">
-          <button className="play-btn" onClick={() => alert("Play button clicked!")}>
+          <button className="play-btn" onClick={() => alert('Play button clicked!')}>
             <PlayCircle size={24} /> Play
           </button>
           <h1 className="title">Spelling Gauntlet</h1>
           <div className="nav-icons">
-            <User onClick={() => handlePopup("profile")} className="icon" />
-            <Trophy onClick={() => handlePopup("leaderboard")} className="icon" />
-            <Settings onClick={() => handlePopup("settings")} className="icon" />
+            <User onClick={() => handlePopup('profile')} className="icon" />
+            <Trophy onClick={() => handlePopup('leaderboard')} className="icon" />
+            <Settings onClick={() => handlePopup('settings')} className="icon" />
           </div>
         </nav>
 
@@ -54,9 +73,9 @@ function HomePage() {
         <div className="main-content">
           <h2 className="section-title">How to Play?</h2>
           <p className="description">
-            Test your spelling skills in the ultimate gauntlet! Spell words correctly and advance, but get one wrong, and <span style={{ color: 'red' }}>you lose!</span> Aim for the highest score and top the leaderboard!
+            Test your spelling skills in the ultimate gauntlet! <span style={{ color: 'lightgreen', fontWeight: 'bold' }}>Spell words correctly and advance,</span> but get one wrong, and <span style={{ color: 'red', fontWeight: 'bold' }}>you lose!</span> Aim for the highest score and top the leaderboard!
           </p>
-          <button className="tutorial-btn" onClick={() => alert("Tutorial clicked!")}>
+          <button className="tutorial-btn" onClick={() => alert('Tutorial clicked!')}>
             Learn More
           </button>
           <div className="github">
@@ -93,7 +112,7 @@ function HomePage() {
               <button className="close-btn" onClick={closePopup}>
                 ✕
               </button>
-              {popup === "profile" && (
+              {popup === 'profile' && (
                 <div>
                   <h2>Profile</h2>
                   {loading && <p>Loading...</p>}
@@ -147,14 +166,26 @@ function HomePage() {
                 </div>
               )}
 
-
-              {popup === "leaderboard" && (
+              {popup === 'leaderboard' && (
                 <div>
                   <h2>Leaderboard</h2>
-                  <p>Leaderboard data will go here. {/* Add API requests */}</p>
+                  {loading && <p>Loading...</p>}
+                  {error && <p>{error}</p>}
+                  {leaderboardData && (
+                    <div className="leaderboard">
+                      <ul>
+                        {leaderboardData.map((game, index) => (
+                          <li key={index}>
+                            <strong>{game.playerName}</strong>: {game.score} points
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               )}
-              {popup === "settings" && (
+
+              {popup === 'settings' && (
                 <div>
                   <h2>Settings</h2>
                   <p>Settings options will go here. {/* Add API requests */}</p>

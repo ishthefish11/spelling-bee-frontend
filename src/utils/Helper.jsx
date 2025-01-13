@@ -6,11 +6,12 @@ const getPlayerInfo = async () => {
       .find((row) => row.startsWith("playerId="))
       ?.split("=")[1];
 
+    let playerData;
+
     if (playerId) {
       // If playerId exists, fetch player data
       const response = await fetch(`http://localhost:8080/players/${playerId}`, {
         method: "GET",
-        
         credentials: "include", // Include cookies
       });
 
@@ -18,7 +19,7 @@ const getPlayerInfo = async () => {
         throw new Error(`Failed to fetch player by ID: ${response.statusText}`);
       }
 
-      return await response.json();
+      playerData = await response.json();
     } else {
       // If playerId cookie doesn't exist, retrieve it using username
       const authToken = document.cookie
@@ -49,16 +50,54 @@ const getPlayerInfo = async () => {
         );
       }
 
-      const player = await playerResponse.json();
+      playerData = await playerResponse.json();
 
       // Set playerId cookie
-      document.cookie = `playerId=${player.playerId}; Path=/; Secure; HttpOnly=false; Max-Age=${60 * 60 * 24}`;
-      return player;
+      document.cookie = `playerId=${playerData.playerId}; Path=/; Secure; HttpOnly=false; Max-Age=${60 * 60 * 24}`;
     }
+
+    return playerData;
   } catch (error) {
     console.error("Error fetching player information:", error);
     throw error;
   }
 };
 
-export default getPlayerInfo;
+const getLeaderboardGames = async () => {
+  try {
+    const response = await fetch(`http://localhost:8080/games/sorted`, {
+      method: "GET",
+      credentials: "include", // Include cookies
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch leaderboard games: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching leaderboard games:", error);
+    throw error;
+  }
+};
+
+const fetchAudioByGameId = async (gameId) => {
+  try {
+    const response = await fetch(`http://localhost:8080/voice/${gameId}`, {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch audio");
+    }
+
+    const blob = await response.blob(); // Convert response to a Blob
+    const url = URL.createObjectURL(blob); // Create an object URL for the blob
+    return url;
+  } catch (error) {
+    console.error("Error fetching audio:", error);
+  }
+};
+
+
+export { getPlayerInfo, getLeaderboardGames, fetchAudioByGameId };
