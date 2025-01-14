@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { User, Trophy, Settings, PlayCircle } from 'lucide-react';
+import { User, Trophy, Settings, PlayCircle, } from 'lucide-react';
 import s from './HomePage.module.css';
 import { getPlayerInfo, getLeaderboardGames } from './utils/Helper';
 
@@ -54,11 +54,17 @@ function HomePage() {
   }, [popup]);
 
   return (
+    
     <div className={s['animated-background']}>
       <div className={s['container']}>
+        {/* <div className={s['bee-container']}>
+          <div className={s['bee']}>
+            <div className={s['wings']}></div>
+          </div>
+        </div> */}
         {/* Navigation Bar */}
         <nav className={s['navbar']}>
-          <button className={s['play-btn']} onClick={() => alert('Play button clicked!')}>
+          <button className={s['play-btn']} onClick={() =>   window.location.href = "/play"}>
             <PlayCircle size={24} /> Play
           </button>
           <h1 className={s['title']}>Spelling Gauntlet</h1>

@@ -15,10 +15,10 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: linear-gradient(135deg, #6a8dd3, #5e9cda, #4d83d4, #7db1ec);
+  background: linear-gradient(135deg, #82cdff, #68adf1, #5aa7ff, #127fbe);
   background-size: 300% 300%;
   animation: gradient-animation 15s ease infinite;
-  filter: brightness(85%);
+  filter: brightness(90%);
 }
 
 @keyframes gradient-animation {
@@ -371,6 +371,105 @@
 
 .leaderboard-item:first-child {
   font-weight: bold;
+}
+/* HomePage.module.css */
+
+/* Container for centering the bee and applying animation */
+.bee-container {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: fly 4s infinite alternate;
+}
+
+/* Bee body */
+.bee {
+  width: 150px;
+  height: 100px;
+  background: linear-gradient(
+    to right,
+    #f4c13d 30%,
+    #0d323e 30%,
+    #0d323e 45%,
+    #f4c13d 45%,
+    #f4c13d 55%,
+    #0d323e 55%,
+    #0d323e 70%,
+    #f4c13d 70%,
+    #f4c13d 80%,
+    #0d323e 80%
+  );
+  border-radius: 3rem;
+  position: relative;
+  box-shadow: inset 0 -0.75rem rgba(0, 0, 0, 0.1);
+}
+
+/* Bee stripes and details */
+.bee::before,
+.bee::after {
+  content: "";
+  position: absolute;
+}
+
+.bee::before {
+  width: 12px;
+  height: 12px;
+  background-color: #0d323e;
+  border-radius: 50%;
+  top: 42px;
+  left: 14px;
+}
+
+.bee::after {
+  width: 22px;
+  height: 6px;
+  background-color: #0d323e;
+  border-radius: 10px;
+  top: 48%;
+  right: -10px;
+}
+
+/* Wings */
+.wings {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  background-color: #ea92b9;
+  border-radius: 5rem 5rem 0 5rem;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wings::before {
+  content: "";
+  position: absolute;
+  width: 65px;
+  height: 70px;
+  background-color: #ea92b9;
+  border-radius: 5rem 5rem 5rem 0;
+  left: 60px;
+}
+
+.wings::after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  box-shadow: -0.6em -0.6em #f2c7c9;
+  border-radius: 50%;
+  top: 14px;
+  left: 16px;
+}
+
+/* Keyframe for flying animation */
+@keyframes fly {
+  50% {
+    transform: translate(-50%, -3.12em);
+  }
 }
 
 }
