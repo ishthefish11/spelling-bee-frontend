@@ -294,6 +294,96 @@
   color: gray;
 }
 
+.leaderboard-box {
+  max-height: 500px; /* Increased height */
+  overflow-y: auto;
+  padding: 15px; /* Increased padding */
+  border: 1px solid #ddd;
+  border-radius: 10px; /* Increased border radius */
+  background-color: #f9f9f9;
+}
+
+.leaderboard-box ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.leaderboard-box li {
+  padding: 10px; /* Increased padding */
+  background-color: #ffffff;
+  margin-bottom: 8px; /* Increased spacing */
+  border-radius: 5px; /* Increased border radius */
+  font-size: 18px; /* Increased font size */
+}
+
+.leaderboard-box p {
+  font-size: 18px; /* Increased font size */
+  color: gray;
+}
+
+  /* Leaderboard Styles */
+.leaderboard-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 10px;
+}
+
+.rank-column {
+  text-align: left;
+}
+
+.name-column {
+  text-align: center;
+}
+
+.score-column {
+  text-align: right;
+}
+.leaderboard-row.gold {
+  background-color: #ffd700;
+}
+
+
+.leaderboard-row.silver {
+  background-color: #C0C0C0;
+}
+
+.leaderboard-row.bronze {
+  background-color: #cd7f32;
+}
+
+.leaderboard-item {
+  flex: 1;
+  text-align: center;
+}
+
+.leaderboard-item:not(:last-child) {
+  border-right: 2px solid #444;
+}
+
+.leaderboard-item:first-child {
+  font-weight: bold;
+}
+
+.leaderboard-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff4500; /* Vibrant color for the title */
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 @media (max-width: 768px) {
   .profile-statistics {
     flex-direction: column;
@@ -319,157 +409,5 @@
     width: 120px; /* Increased size */
     height: 120px; /* Increased size */
   }
-  /* Leaderboard Styles */
-.leaderboard-table {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 10px;
-}
-
-.leaderboard-header {
-  display: flex;
-  font-weight: bold;
-  padding: 10px;
-  background-color: #333;
-  color: white;
-  border-radius: 5px;
-}
-
-.header-item {
-  flex: 1;
-  text-align: center;
-}
-
-.leaderboard-row {
-  display: flex;
-  padding: 10px;
-  background-color: #222;
-  border-radius: 5px;
-}
-
-.leaderboard-row.gold {
-  background-color: #FFD700;
-}
-
-.leaderboard-row.silver {
-  background-color: #C0C0C0;
-}
-
-.leaderboard-row.bronze {
-  background-color: #cd7f32;
-}
-
-.leaderboard-item {
-  flex: 1;
-  text-align: center;
-}
-
-.leaderboard-item:not(:last-child) {
-  border-right: 2px solid #444;
-}
-
-.leaderboard-item:first-child {
-  font-weight: bold;
-}
-/* HomePage.module.css */
-
-/* Container for centering the bee and applying animation */
-.bee-container {
-  width: 500px;
-  height: 500px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: fly 4s infinite alternate;
-}
-
-/* Bee body */
-.bee {
-  width: 150px;
-  height: 100px;
-  background: linear-gradient(
-    to right,
-    #f4c13d 30%,
-    #0d323e 30%,
-    #0d323e 45%,
-    #f4c13d 45%,
-    #f4c13d 55%,
-    #0d323e 55%,
-    #0d323e 70%,
-    #f4c13d 70%,
-    #f4c13d 80%,
-    #0d323e 80%
-  );
-  border-radius: 3rem;
-  position: relative;
-  box-shadow: inset 0 -0.75rem rgba(0, 0, 0, 0.1);
-}
-
-/* Bee stripes and details */
-.bee::before,
-.bee::after {
-  content: "";
-  position: absolute;
-}
-
-.bee::before {
-  width: 12px;
-  height: 12px;
-  background-color: #0d323e;
-  border-radius: 50%;
-  top: 42px;
-  left: 14px;
-}
-
-.bee::after {
-  width: 22px;
-  height: 6px;
-  background-color: #0d323e;
-  border-radius: 10px;
-  top: 48%;
-  right: -10px;
-}
-
-/* Wings */
-.wings {
-  position: absolute;
-  width: 65px;
-  height: 65px;
-  background-color: #ea92b9;
-  border-radius: 5rem 5rem 0 5rem;
-  top: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.wings::before {
-  content: "";
-  position: absolute;
-  width: 65px;
-  height: 70px;
-  background-color: #ea92b9;
-  border-radius: 5rem 5rem 5rem 0;
-  left: 60px;
-}
-
-.wings::after {
-  content: "";
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  box-shadow: -0.6em -0.6em #f2c7c9;
-  border-radius: 50%;
-  top: 14px;
-  left: 16px;
-}
-
-/* Keyframe for flying animation */
-@keyframes fly {
-  50% {
-    transform: translate(-50%, -3.12em);
-  }
-}
 
 }

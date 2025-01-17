@@ -47,9 +47,9 @@ const GamePage = () => {
   function reset_animation() {
     const el = document.querySelector(`.${s['congratulations-message']}`);
     if (el) {
-      el.style.animation = 'none'; // Disable the animation
-      void el.offsetWidth; // Trigger reflow to reset the animation
-      el.style.animation = ''; // Reapply the animation
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
     }
   }
   

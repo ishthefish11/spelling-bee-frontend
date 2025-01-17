@@ -52,7 +52,16 @@ function HomePage() {
         });
     }
   }, [popup]);
-
+  
+  function getOrdinalSuffix(rank) {
+    const j = rank % 10;
+    const k = rank % 100;
+    if (j === 1 && k !== 11) return 'st';
+    if (j === 2 && k !== 12) return 'nd';
+    if (j === 3 && k !== 13) return 'rd';
+    return 'th';
+  }
+  
   return (
     
     <div className={s['animated-background']}>
@@ -174,17 +183,41 @@ function HomePage() {
 
               {popup === 'leaderboard' && (
                 <div>
-                  <h2>Leaderboard</h2>
+                  <h2 className={`${s['leaderboard-title']}`}>🏆 Leaderboard 🏆</h2>
                   {loading && <p>Loading...</p>}
                   {error && <p>{error}</p>}
                   {leaderboardData && (
-                    <div className={s['leaderboard']}>
+                    <div className={`${s['leaderboard']} ${s['leaderboard-box']}`}>
                       <ul>
-                        {leaderboardData.map((game, index) => (
-                          <li key={index}>
-                            <strong>{game.playerName}</strong>: {game.score} points
-                          </li>
-                        ))}
+                        {leaderboardData.map((game, index) => {
+                          let rankClass = '';
+                          let medalEmoji = '';
+
+                          if (index === 0) {
+                            rankClass = s['gold'];
+                            medalEmoji = '🥇';
+                          } else if (index === 1) {
+                            rankClass = s['silver'];
+                            medalEmoji = '🥈';
+                          } else if (index === 2) {
+                            rankClass = s['bronze'];
+                            medalEmoji = '🥉';
+                          }
+
+                          return (
+                            <li key={index} className={`${s['leaderboard-row']} ${rankClass}`}>
+                              <span className={s['rank-column']}>
+                                <strong>{index + 1}{getOrdinalSuffix(index + 1)} {medalEmoji}</strong>
+                              </span>
+                              <span className={s['name-column']}>
+                                <strong>{game.playerName}</strong>
+                              </span>
+                              <span className={s['score-column']}>
+                                {game.score} points
+                              </span>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   )}
