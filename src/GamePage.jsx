@@ -52,7 +52,6 @@ const GamePage = () => {
       el.style.animation = '';
     }
   }
-  
 
   const handleGuess = async (e) => {
     e.preventDefault();
@@ -120,6 +119,9 @@ const GamePage = () => {
       <button className={s['home-btn']} onClick={goBack}>
       <ArrowLeftFromLine /> Go Back
       </button>
+      <button onClick={playAudio} className={s['definition-btn']}> {/* Scoped class */}
+            Get Word Definition 📜
+          </button>
 
       <h1>Spelling Bee Game</h1>
 
@@ -150,6 +152,7 @@ const GamePage = () => {
             Play Word Audio 🔊
           </button>
         </div>
+        
       )}
     </div>
   );
