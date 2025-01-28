@@ -66,17 +66,17 @@ function HomePage() {
     
     <div className={s['animated-background']}>
       <div className={s['container']}>
-        {/* <div className={s['bee-container']}>
+        <div className={s['bee-container']}>
           <div className={s['bee']}>
             <div className={s['wings']}></div>
           </div>
-        </div> */}
+        </div>
         {/* Navigation Bar */}
         <nav className={s['navbar']}>
           <button className={s['play-btn']} onClick={() =>   window.location.href = "/play"}>
             <PlayCircle size={24} /> Play
           </button>
-          <h1 className={s['title']}>Spelling Gauntlet</h1>
+          <h1 className={s['title']}>🐝 Spelling Gauntlet 🐝</h1>
           <div className={s['nav-icons']}>
             <User onClick={() => handlePopup('profile')} className={s['icon']} />
             <Trophy onClick={() => handlePopup('leaderboard')} className={s['icon']} />
@@ -96,7 +96,6 @@ function HomePage() {
           <div className={s['github']}>
             <a
               href="https://www.github.com/ishthefish11"
-              target="_blank"
               rel="noopener noreferrer"
               className={s['github-link']}
             >
