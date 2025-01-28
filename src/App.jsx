@@ -1,21 +1,25 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginPage from "./LoginPage"; // The login page component
-import HomePage from "./HomePage"; // Main content of the application
+import LoginPage from "./LoginPage";
+import HomePage from "./HomePage";
 import ProtectedRouter from "./utils/ProtectedRouter";
 import PublicRouter from "./utils/PublicRouter";
 import GamePage from "./GamePage";
+import RegisterPage from "./RegisterPage";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Public Route for Login */}
+        {/* Public Routes */}
         <Route element={<PublicRouter />}>
           <Route path="/login" element={<LoginPage />} />
         </Route>
+        <Route element={<PublicRouter />}>
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
 
-        {/* Protected Routes for Authenticated Pages */}
+        {/* Protected Routes */}
         <Route element={<ProtectedRouter />}>
           <Route path="/" element={<HomePage />} />
         </Route>

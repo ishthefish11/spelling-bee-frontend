@@ -21,11 +21,9 @@ function LoginPage() {
       });
   
       if (response.ok) {
-        // Login successful
         console.log("Login successful!");
         window.location.href = "/";
       } else {
-        // Handle login failure
         const errorMessage = await response.text();
         setError(errorMessage || "Login failed");
       }
@@ -60,6 +58,8 @@ function LoginPage() {
             />
           </div>
           <button type="submit">Login</button>
+          <p style={{ display: 'inline' }}>Need to create an account?</p>
+          <a href="/register" style={{ display: 'inline', marginLeft: '5px', fontSize: '15px' }}>Register</a>
         </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
