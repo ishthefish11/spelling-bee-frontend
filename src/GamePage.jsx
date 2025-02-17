@@ -52,7 +52,25 @@ const GamePage = () => {
       el.style.animation = '';
     }
   }
-
+  const getDefinition = async () => {
+    if (!game) return;
+  
+    try {
+      console.log(game.gameId);
+      const response = await fetch(
+        `http://localhost:8080/play/${game.gameId}/definition`,
+        { method: "GET", credentials: "include" }
+      );
+  
+      if (!response.ok) throw new Error();
+  
+      const { definition } = await response.json();
+      setMessage(`Definition: ${definition}`);
+    } catch {
+      setMessage("Error fetching the definition.");
+    }
+  };
+  
   const handleGuess = async (e) => {
     e.preventDefault();
 
@@ -119,7 +137,7 @@ const GamePage = () => {
       <button className={s['home-btn']} onClick={goBack}>
       <ArrowLeftFromLine /> Go Back
       </button>
-      <button onClick={playAudio} className={s['definition-btn']}> {/* Scoped class */}
+      <button onClick={getDefinition} className={s['definition-btn']}> {/* Scoped class */}
             Get Word Definition 📜
           </button>
 
